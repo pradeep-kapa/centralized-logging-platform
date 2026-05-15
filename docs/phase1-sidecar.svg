@@ -1,0 +1,105 @@
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#555"/>
+    </marker>
+    <marker id="b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="900" height="36" rx="0" fill="#f0f4f8"/>
+  <text x="450" y="23" fill="#1a202c" font-size="14" font-weight="700" text-anchor="middle">Phase 1 — Sidecar-based log collection</text>
+
+  <!-- K8s cluster boundary -->
+  <rect x="16" y="50" width="872" height="360" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <text x="30" y="70" fill="#64748b" font-size="11" font-weight="600">Kubernetes cluster</text>
+
+  <!-- Namespace: app -->
+  <rect x="30" y="80" width="540" height="300" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="44" y="98" fill="#2563eb" font-size="10" font-weight="600">namespace: app</text>
+
+  <!-- Pod A -->
+  <rect x="44" y="108" width="230" height="240" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="159" y="128" fill="#1e40af" font-size="11" font-weight="700" text-anchor="middle">Pod A</text>
+  <!-- App container -->
+  <rect x="58" y="138" width="202" height="58" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="159" y="163" fill="#0c4a6e" font-size="10" font-weight="700" text-anchor="middle">App container</text>
+  <text x="159" y="181" fill="#075985" font-size="9.5" text-anchor="middle">sample-service (stdout)</text>
+  <!-- Shared volume -->
+  <rect x="58" y="206" width="202" height="26" rx="4" fill="#fff" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="159" y="223" fill="#475569" font-size="9" text-anchor="middle">emptyDir shared volume</text>
+  <!-- Sidecar -->
+  <rect x="58" y="240" width="202" height="58" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="159" y="265" fill="#713f12" font-size="10" font-weight="700" text-anchor="middle">Sidecar collector</text>
+  <text x="159" y="281" fill="#92400e" font-size="9.5" text-anchor="middle">reads from shared volume</text>
+  <!-- Arrows inside pod A -->
+  <line x1="159" y1="196" x2="159" y2="206" stroke="#64748b" stroke-width="1" marker-end="url(#b)"/>
+  <line x1="159" y1="232" x2="159" y2="240" stroke="#64748b" stroke-width="1" marker-end="url(#b)"/>
+
+  <!-- Pod B -->
+  <rect x="302" y="108" width="230" height="240" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="417" y="128" fill="#1e40af" font-size="11" font-weight="700" text-anchor="middle">Pod B</text>
+  <rect x="316" y="138" width="202" height="58" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="417" y="163" fill="#0c4a6e" font-size="10" font-weight="700" text-anchor="middle">App container</text>
+  <text x="417" y="181" fill="#075985" font-size="9.5" text-anchor="middle">sample-service (stdout)</text>
+  <rect x="316" y="206" width="202" height="26" rx="4" fill="#fff" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="417" y="223" fill="#475569" font-size="9" text-anchor="middle">emptyDir shared volume</text>
+  <rect x="316" y="240" width="202" height="58" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="417" y="265" fill="#713f12" font-size="10" font-weight="700" text-anchor="middle">Sidecar collector</text>
+  <text x="417" y="281" fill="#92400e" font-size="9.5" text-anchor="middle">reads from shared volume</text>
+  <line x1="417" y1="196" x2="417" y2="206" stroke="#64748b" stroke-width="1" marker-end="url(#b)"/>
+  <line x1="417" y1="232" x2="417" y2="240" stroke="#64748b" stroke-width="1" marker-end="url(#b)"/>
+
+  <!-- Namespace: observability -->
+  <rect x="590" y="80" width="282" height="330" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="604" y="98" fill="#6d28d9" font-size="10" font-weight="600">namespace: observability</text>
+
+  <!-- Loki -->
+  <rect x="606" y="108" width="250" height="68" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="731" y="136" fill="#4c1d95" font-size="11" font-weight="700" text-anchor="middle">Grafana Loki</text>
+  <text x="731" y="155" fill="#5b21b6" font-size="9.5" text-anchor="middle">Centralized log storage + LogQL</text>
+
+  <!-- Prometheus -->
+  <rect x="606" y="192" width="250" height="68" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5"/>
+  <text x="731" y="220" fill="#9f1239" font-size="11" font-weight="700" text-anchor="middle">Prometheus</text>
+  <text x="731" y="239" fill="#be123c" font-size="9.5" text-anchor="middle">Platform metrics</text>
+
+  <!-- Grafana -->
+  <rect x="606" y="276" width="250" height="68" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="731" y="304" fill="#4c1d95" font-size="11" font-weight="700" text-anchor="middle">Grafana</text>
+  <text x="731" y="323" fill="#5b21b6" font-size="9.5" text-anchor="middle">Dashboards + Explore (LogQL)</text>
+
+  <!-- Sidecar → Loki arrows -->
+  <line x1="260" y1="269" x2="590" y2="142" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="518" y1="269" x2="590" y2="142" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="480" y="200" fill="#374151" font-size="10" font-weight="600">HTTP push</text>
+
+  <!-- Grafana → Loki query -->
+  <line x1="731" y1="276" x2="731" y2="260" stroke="#888" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#b)"/>
+  <line x1="720" y1="276" x2="720" y2="260" stroke="#888" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#b)"/>
+
+  <!-- Tradeoff box -->
+  <rect x="16" y="424" width="420" height="76" rx="8" fill="#fefce8" stroke="#eab308" stroke-width="1.5"/>
+  <text x="32" y="446" fill="#713f12" font-size="11" font-weight="700">⚠  Baseline tradeoff</text>
+  <text x="32" y="464" fill="#92400e" font-size="10">One sidecar container per pod — CPU and memory overhead</text>
+  <text x="32" y="482" fill="#92400e" font-size="10">multiplies with pod count. Good baseline for comparison,</text>
+  <text x="32" y="498" fill="#92400e" font-size="10">not recommended at scale.</text>
+
+  <!-- Legend -->
+  <rect x="460" y="424" width="424" height="76" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="476" y="444" fill="#374151" font-size="10" font-weight="700">Legend</text>
+  <rect x="476" y="454" width="14" height="10" rx="2" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="496" y="464" fill="#374151" font-size="9.5">Pod</text>
+  <rect x="540" y="454" width="14" height="10" rx="2" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+  <text x="560" y="464" fill="#374151" font-size="9.5">App container</text>
+  <rect x="650" y="454" width="14" height="10" rx="2" fill="#fef9c3" stroke="#eab308" stroke-width="1"/>
+  <text x="670" y="464" fill="#374151" font-size="9.5">Sidecar</text>
+  <rect x="476" y="474" width="14" height="10" rx="2" fill="#ede9fe" stroke="#7c3aed" stroke-width="1"/>
+  <text x="496" y="484" fill="#374151" font-size="9.5">Observability component</text>
+  <line x1="476" y1="497" x2="500" y2="497" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="506" y="500" fill="#374151" font-size="9.5">Log push</text>
+  <line x1="580" y1="497" x2="604" y2="497" stroke="#888" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#b)"/>
+  <text x="610" y="500" fill="#374151" font-size="9.5">Query</text>
+</svg>
