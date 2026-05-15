@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-service-sidecar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-service-sidecar
+  template:
+    metadata:
+      labels:
+        app: sample-service-sidecar
+    spec:
+      containers:
+        - name: app
+          image: sample-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+        - name: log-sidecar
+          image: busybox:1.36
+          command: ["sh", "-c", "tail -n+1 -F /var/log/app.log"]
+          volumeMounts:
+            - name: applogs
+              mountPath: /var/log
+      volumes:
+        - name: applogs
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-service-sidecar
+spec:
+  selector:
+    app: sample-service-sidecar
+  ports:
+    - port: 80
+      targetPort: 8080
