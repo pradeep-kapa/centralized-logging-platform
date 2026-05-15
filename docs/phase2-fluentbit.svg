@@ -1,0 +1,109 @@
+<svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#555"/>
+    </marker>
+    <marker id="b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#888"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="36" fill="#f0f4f8"/>
+  <text x="450" y="23" fill="#1a202c" font-size="14" font-weight="700" text-anchor="middle">Phase 2 — Fluent Bit DaemonSet (node-level collection)</text>
+
+  <!-- K8s cluster -->
+  <rect x="16" y="50" width="872" height="380" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <text x="30" y="70" fill="#64748b" font-size="11" font-weight="600">Kubernetes cluster</text>
+
+  <!-- Node 1 -->
+  <rect x="30" y="80" width="390" height="330" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="44" y="98" fill="#2563eb" font-size="10" font-weight="600">Node 1</text>
+
+  <!-- Pods on node 1 -->
+  <rect x="44" y="108" width="170" height="68" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="129" y="135" fill="#0c4a6e" font-size="10" font-weight="700" text-anchor="middle">Pod A</text>
+  <text x="129" y="152" fill="#075985" font-size="9.5" text-anchor="middle">app container</text>
+  <text x="129" y="167" fill="#075985" font-size="9" text-anchor="middle">stdout / stderr</text>
+
+  <rect x="232" y="108" width="170" height="68" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="317" y="135" fill="#0c4a6e" font-size="10" font-weight="700" text-anchor="middle">Pod B</text>
+  <text x="317" y="152" fill="#075985" font-size="9.5" text-anchor="middle">app container</text>
+  <text x="317" y="167" fill="#075985" font-size="9" text-anchor="middle">stdout / stderr</text>
+
+  <!-- Host path -->
+  <rect x="44" y="192" width="358" height="24" rx="4" fill="#fff" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="223" y="208" fill="#475569" font-size="9.5" text-anchor="middle">/var/log/containers  (host path mount)</text>
+  <line x1="129" y1="176" x2="129" y2="192" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+  <line x1="317" y1="176" x2="317" y2="192" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Fluent Bit on node 1 -->
+  <rect x="88" y="228" width="270" height="90" rx="8" fill="#fef9c3" stroke="#d97706" stroke-width="2"/>
+  <text x="223" y="250" fill="#713f12" font-size="11" font-weight="700" text-anchor="middle">Fluent Bit  (DaemonSet pod)</text>
+  <text x="223" y="268" fill="#92400e" font-size="9.5" text-anchor="middle">INPUT: tail  /var/log/containers/*.log</text>
+  <text x="223" y="284" fill="#92400e" font-size="9.5" text-anchor="middle">FILTER: kubernetes metadata enrichment</text>
+  <text x="223" y="300" fill="#92400e" font-size="9.5" text-anchor="middle">OUTPUT: Loki HTTP push (labels)</text>
+  <line x1="223" y1="216" x2="223" y2="228" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Metadata note -->
+  <rect x="44" y="336" width="358" height="50" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1"/>
+  <text x="223" y="355" fill="#7c2d12" font-size="9.5" font-weight="600" text-anchor="middle">K8s metadata preserved on each log record</text>
+  <text x="223" y="370" fill="#9a3412" font-size="9" text-anchor="middle">namespace · pod name · container name · labels</text>
+  <text x="223" y="383" fill="#9a3412" font-size="9" text-anchor="middle">Used as Loki stream labels (keep low-cardinality)</text>
+
+  <!-- Node 2 -->
+  <rect x="440" y="80" width="280" height="230" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="454" y="98" fill="#2563eb" font-size="10" font-weight="600">Node 2  (same DaemonSet pattern)</text>
+
+  <rect x="454" y="108" width="248" height="68" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="578" y="135" fill="#0c4a6e" font-size="10" font-weight="700" text-anchor="middle">Pod C  /  Pod D</text>
+  <text x="578" y="152" fill="#075985" font-size="9.5" text-anchor="middle">app containers  (stdout / stderr)</text>
+  <text x="578" y="167" fill="#075985" font-size="9" text-anchor="middle">any number of pods, one collector</text>
+
+  <rect x="454" y="192" width="248" height="24" rx="4" fill="#fff" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="578" y="208" fill="#475569" font-size="9.5" text-anchor="middle">/var/log/containers</text>
+  <line x1="578" y1="176" x2="578" y2="192" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <rect x="482" y="228" width="192" height="72" rx="8" fill="#fef9c3" stroke="#d97706" stroke-width="2"/>
+  <text x="578" y="250" fill="#713f12" font-size="10" font-weight="700" text-anchor="middle">Fluent Bit</text>
+  <text x="578" y="266" fill="#92400e" font-size="9.5" text-anchor="middle">DaemonSet pod</text>
+  <text x="578" y="282" fill="#92400e" font-size="9.5" text-anchor="middle">tail + enrich + forward</text>
+  <line x1="578" y1="216" x2="578" y2="228" stroke="#555" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Observability stack -->
+  <rect x="740" y="80" width="140" height="330" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="754" y="98" fill="#6d28d9" font-size="10" font-weight="600">observability</text>
+
+  <rect x="750" y="108" width="120" height="68" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="810" y="136" fill="#4c1d95" font-size="10" font-weight="700" text-anchor="middle">Grafana Loki</text>
+  <text x="810" y="155" fill="#5b21b6" font-size="9" text-anchor="middle">log backend</text>
+
+  <rect x="750" y="194" width="120" height="68" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5"/>
+  <text x="810" y="222" fill="#9f1239" font-size="10" font-weight="700" text-anchor="middle">Prometheus</text>
+  <text x="810" y="241" fill="#be123c" font-size="9" text-anchor="middle">metrics</text>
+
+  <rect x="750" y="280" width="120" height="68" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="810" y="308" fill="#4c1d95" font-size="10" font-weight="700" text-anchor="middle">Grafana</text>
+  <text x="810" y="327" fill="#5b21b6" font-size="9" text-anchor="middle">dashboards</text>
+
+  <!-- Fluent Bit → Loki -->
+  <line x1="358" y1="273" x2="742" y2="142" stroke="#555" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <line x1="674" y1="264" x2="742" y2="175" stroke="#555" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="594" y="204" fill="#374151" font-size="10" font-weight="600" transform="rotate(-20,594,204)">HTTP push (labels)</text>
+
+  <!-- Grafana → Loki/Prom -->
+  <line x1="810" y1="280" x2="810" y2="262" stroke="#888" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#b)"/>
+
+  <!-- Improvement box -->
+  <rect x="16" y="444" width="400" height="76" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="32" y="464" fill="#14532d" font-size="11" font-weight="700">✓  Key improvement over Phase 1</text>
+  <text x="32" y="482" fill="#166534" font-size="10">One Fluent Bit pod per node regardless of pod count.</text>
+  <text x="32" y="498" fill="#166534" font-size="10">Sidecar overhead eliminated. Label strategy determines</text>
+  <text x="32" y="514" fill="#166534" font-size="10">Loki stream efficiency — keep labels low-cardinality.</text>
+
+  <!-- Note -->
+  <rect x="434" y="444" width="450" height="76" rx="8" fill="#fffbeb" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="450" y="464" fill="#78350f" font-size="11" font-weight="700">Design note: Loki label strategy</text>
+  <text x="450" y="482" fill="#92400e" font-size="10">Labels define Loki streams and affect storage + query</text>
+  <text x="450" y="498" fill="#92400e" font-size="10">performance. Use: namespace, pod, container, app.</text>
+  <text x="450" y="514" fill="#92400e" font-size="10">Avoid high-cardinality values like request IDs.</text>
+</svg>
